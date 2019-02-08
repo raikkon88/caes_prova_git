@@ -1,0 +1,64 @@
+> A.txt
+git add A.txt
+git commit -m "[FC] Initial File"
+> B.txt
+git add B.txt
+git commit -m "[FC] Initial File"
+echo "This is the first change to A file" >> A.txt
+echo "This is the first change to B file" >> B.txt
+git add -A
+git commit -m "[FEAT] Added first changes to files A and B"
+git checkout -b branca1
+> C.txt
+$ git add C.txt
+$ git commit -m "[FEAT] Initial File"
+$ echo "canvi C1 branca1" >> C.txt
+$ git add -A
+$ git commit -m "[FEAT] Added text to file C"
+$ git checkout master
+$ git checkout -b branca2
+$ > D.txt
+$ git add D.txt
+$ git commit -m "[FEAT] Initial File"
+$ echo "canvi D1 branca 2" >> D.txt
+$ git add D.txt
+$ git commit -m "[FEAT] Added text to file D"
+$ git checkout branca1
+$ git merge branca2
+$ git checkout master
+$ git merge branca1
+$ git checkout master
+$ > E.txt
+$ git add E.txt
+$ git commit -m "[FEAT] Initial File"
+$ git checkout -b branca3
+$ echo "canvia E1 branca 3" >> E.txt
+$ git add E.txt
+$ git commit -m "[FEAT] Added text to E"
+$ git checkout master
+$ git checkout -b branca4
+$ echo "canvia E1 branca 4" >> E.txt
+$ git add E.txt
+$ git commit -m "[FEAT] Adding text to file E"
+$ git checkout master
+$ git merge branca3
+$ git merge branca4
+$ echo "canvia E1 branca 3\ncanvia E1 branca 4" > E.txt
+$ git add -A
+$ git commit -m "[FEAT] Solved conflicts in E file, README updated with blocks 5 and 6"
+$ git checkout master
+$ echo "Canvi A2" >> A.txt
+$ git add A.txt
+$ git commit -m "[FEAT] Another change to A file"
+$ git reset --hard cff2e7b
+$ echo "Canvi A3" >> A.txt
+$ git add A.txt
+$ git commit -m "[FEAT] Adding text to A"
+$ echo "Canvi B2" >> B.txt
+$ git add B.txt
+$ git commit -m "[FEAT] Adding text to B"
+$ echo "Canvi C1" >> C.txt
+$ git add C.txt
+$ git commit -m "[FEAT] Adding text to C"
+$ git revert 231a6cd
+$ git log --oneline

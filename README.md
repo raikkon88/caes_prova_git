@@ -230,7 +230,7 @@ $ git add A.txt
 $ git commit -m "[FEAT] Another change to A file"
 [master f6f7963] [FEAT] Another change to A file
  1 file changed, 1 insertion(+)
- $ git log --oneline
+$ git log --oneline
  f6f7963 (HEAD -> master) [FEAT] Another change to A file
  cff2e7b [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
  2d462fa (branca4) [FEAT] Adding text to file E
@@ -294,5 +294,53 @@ $ git add C.txt
 $ git commit -m "[FEAT] Adding text to C"
 [master 2a85ff9] [FEAT] Adding text to C
  1 file changed, 1 insertion(+)
+ ```
 
+Now I will take the revert strategy to undo only the change made by commit 231a6cd that stands for the change in B file.
+
+```
+$ git log --oneline
+49016af (HEAD -> master) [FEAT] Adding block 8
+2a85ff9 [FEAT] Adding text to C
+231a6cd [FEAT] Adding text to B
+e64908a [FEAT] Adding text to A
+cff2e7b [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+2d462fa (branca4) [FEAT] Adding text to file E
+c5f3809 (branca3) [FEAT] Added text to E
+15f5a44 [FEAT] Initial File
+b9f3b3a (branca1) Merge branch 'branca2' into branca1
+97e1db4 (branca2) [FEAT] Added documentation for blocks 1 - 4
+b8729c3 [FEAT] Added text to file D
+72d39c6 [FEAT] Initial File
+695f795 [FEAT] Added text to file C
+e15596f [FEAT] Initial File
+356bd4f [FEAT] Added first changes to files A and B
+5db6ab6 [FEAT] adding documentation for project
+9807f6d [FC] Initial File
+8cf5f68 [FC] Initial File
+
+$ git revert 231a6cd
+[master d2e67c4] Revert "[FEAT] Adding text to B"
+ 1 file changed, 1 deletion(-)
+
+ $ git log --oneline
+ d2e67c4 (HEAD -> master) Revert "[FEAT] Adding text to B"
+ 49016af [FEAT] Adding block 8
+ 2a85ff9 [FEAT] Adding text to C
+ 231a6cd [FEAT] Adding text to B
+ e64908a [FEAT] Adding text to A
+ cff2e7b [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+ 2d462fa (branca4) [FEAT] Adding text to file E
+ c5f3809 (branca3) [FEAT] Added text to E
+ 15f5a44 [FEAT] Initial File
+ b9f3b3a (branca1) Merge branch 'branca2' into branca1
+ 97e1db4 (branca2) [FEAT] Added documentation for blocks 1 - 4
+ b8729c3 [FEAT] Added text to file D
+ 72d39c6 [FEAT] Initial File
+ 695f795 [FEAT] Added text to file C
+ e15596f [FEAT] Initial File
+ 356bd4f [FEAT] Added first changes to files A and B
+ 5db6ab6 [FEAT] adding documentation for project
+ 9807f6d [FC] Initial File
+ 8cf5f68 [FC] Initial File
 ```
