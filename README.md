@@ -200,7 +200,99 @@ As spected a conflict has appeared, to resolve the conflict will open the file w
 
 ```
 $ nano E.txt
-$ cat E.txt 
+$ cat E.txt
 canvia E1 branca 3
 canvia E1 branca 4
+$ git add -A
+$ git commit -m "[FEAT] Solved conflicts in E file, README updated with blocks 5 and 6"
+[master cff2e7b] [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+```
+
+### Block 7
+
+Changing to master and showing actual branches...
+
+```
+$ git checkout master
+$ git branch
+  branca1
+  branca2
+  branca3
+  branca4
+* master
+```
+
+At this point we will undo a commit.
+
+```
+$ echo "Canvi A2" >> A.txt
+$ git add A.txt
+$ git commit -m "[FEAT] Another change to A file"
+[master f6f7963] [FEAT] Another change to A file
+ 1 file changed, 1 insertion(+)
+ $ git log --oneline
+ f6f7963 (HEAD -> master) [FEAT] Another change to A file
+ cff2e7b [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+ 2d462fa (branca4) [FEAT] Adding text to file E
+ c5f3809 (branca3) [FEAT] Added text to E
+ 15f5a44 [FEAT] Initial File
+ b9f3b3a (branca1) Merge branch 'branca2' into branca1
+ 97e1db4 (branca2) [FEAT] Added documentation for blocks 1 - 4
+ b8729c3 [FEAT] Added text to file D
+ 72d39c6 [FEAT] Initial File
+ 695f795 [FEAT] Added text to file C
+ e15596f [FEAT] Initial File
+ 356bd4f [FEAT] Added first changes to files A and B
+ 5db6ab6 [FEAT] adding documentation for project
+ 9807f6d [FC] Initial File
+ 8cf5f68 [FC] Initial File
+```
+
+As we are working on branch master we can undo this commit using two strategies.
+
+The first one is using git revert, which will create a new commit with the changes made as an inverted way, it means changes will be persisted on our branch history.
+
+The second way is using git reset which will erase commit from which we execute the command to target where will make the reset. Must be carefull with merges.
+
+I will choose git reset strategy.
+
+```
+$ git reset --hard cff2e7b
+HEAD ara és a cff2e7b [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+$ git log --oneline
+cff2e7b (HEAD -> master) [FEAT] Solved conflicts in E file, README updated with blocks 5 and 6
+2d462fa (branca4) [FEAT] Adding text to file E
+c5f3809 (branca3) [FEAT] Added text to E
+15f5a44 [FEAT] Initial File
+b9f3b3a (branca1) Merge branch 'branca2' into branca1
+97e1db4 (branca2) [FEAT] Added documentation for blocks 1 - 4
+b8729c3 [FEAT] Added text to file D
+72d39c6 [FEAT] Initial File
+695f795 [FEAT] Added text to file C
+e15596f [FEAT] Initial File
+356bd4f [FEAT] Added first changes to files A and B
+5db6ab6 [FEAT] adding documentation for project
+9807f6d [FC] Initial File
+8cf5f68 [FC] Initial File
+```
+
+### Block 8
+
+```
+$ echo "Canvi A3" >> A.txt
+$ git add A.txt
+$ git commit -m "[FEAT] Adding text to A"
+[master e64908a] [FEAT] Adding text to A
+ 1 file changed, 1 insertion(+)
+$ echo "Canvi B2" >> B.txt
+$ git add B.txt
+$ git commit -m "[FEAT] Adding text to B"
+[master 231a6cd] [FEAT] Adding text to B
+ 1 file changed, 1 insertion(+)
+$ echo "Canvi C1" >> C.txt
+$ git add C.txt
+$ git commit -m "[FEAT] Adding text to C"
+[master 2a85ff9] [FEAT] Adding text to C
+ 1 file changed, 1 insertion(+)
+
 ```
